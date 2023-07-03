@@ -1,0 +1,8 @@
+{
+  "name": "MobiDolar",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react-vite",
+  "id": "c1373033"
+}
