@@ -1,0 +1,23 @@
+.inner-container {
+    /* display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, auto));
+    gap: .6rem; */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding-right: .6rem;
+    padding-left: .6rem;
+    gap: .6rem;
+}
+
+@media (max-width: calc(320px * 2 + 0.6rem)) {
+    .inner-container {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 320px) {
+    .inner-container {
+        overflow-x: scroll;
+    }
+}
