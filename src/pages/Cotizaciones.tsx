@@ -1,5 +1,5 @@
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
-import './Tab2.css';
+import './Cotizaciones.css';
 import QuotationSelector from '../components/QuotationSelector';
 import { useState } from 'react';
 import QuotationFrame from '../components/QuotationFrame';

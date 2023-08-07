@@ -4,27 +4,23 @@ import {
   IonCard,
   IonCardContent,
   IonCardHeader,
-  IonCardSubtitle,
   IonCardTitle,
-  IonCol,
   IonContent,
-  IonGrid,
   IonHeader,
   IonIcon,
   IonInput,
   IonPage,
   IonRippleEffect,
-  IonRow,
   IonSelect,
   IonSelectOption,
-  IonSkeletonText,
   IonSpinner,
   IonText,
   IonTitle,
   IonToolbar,
   SelectCustomEvent,
 } from '@ionic/react';
-import './Tab1.css';
+import './Calculadora.css';
+import '../styles/styles.css';
 import { getQuotation } from '../services/liveQuotation';
 import { useEffect, useState } from 'react';
 import { Quotation, quotationsMap } from '../constants';
@@ -40,7 +36,7 @@ const Tab1: React.FC = () => {
   const [selectedQuotation, setSelectedQuotation] = useState("" as Quotation)
   const [quotation, setQuotation] = useState(defaultQuotation)
   const [loading, setLoading] = useState(false)
-  const [input, setInput] = useState(undefined as unknown as number)
+  const [input, setInput] = useState(0)
   const [toPesos, setToPesos] = useState(true)
 
   const handleSelect = (type: Quotation) => setSelectedQuotation(type)
@@ -71,9 +67,9 @@ const Tab1: React.FC = () => {
 
   return (
     <IonPage>
-      <IonHeader>
+      <IonHeader className="resize-mobile">
         <IonToolbar>
-          <IonTitle>Calculadora</IonTitle>
+          <IonTitle className="header ut--l_r_margin">Calculadora</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
@@ -82,7 +78,7 @@ const Tab1: React.FC = () => {
             <IonTitle size="large">Calculadora</IonTitle>
           </IonToolbar>
         </IonHeader>
-        <div className="change-conversion">
+        <div className="change-conversion ut--l_r_margin">
           <IonText>{toPesos ? "Dólares" : "Pesos"}</IonText>
           <IonButton 
             className="ion-activatable ripple-parent rounded-rectangle" 
@@ -95,7 +91,7 @@ const Tab1: React.FC = () => {
           <IonText>{toPesos ? "Pesos" : "Dólares"}</IonText>
         </div>
         <IonSelect 
-          className="selector ion-text-capitalize"
+          className="ion-text-capitalize ut--l_r_margin"
           id="quotation-select"
           aria-label="Cotizaciones" 
           placeholder="Seleccione una cotización para operar"
@@ -108,59 +104,44 @@ const Tab1: React.FC = () => {
             ))
           }
         </IonSelect>
-        {selectedQuotation ? 
-          <IonInput 
+        {selectedQuotation && 
+          <IonInput
+            className="ut--l_r_margin"
             label="Ingrese el monto que desea convertir:"
+            labelPlacement="floating"
             type="number"
             placeholder="#####"
             value={input}
-            onIonChange={
-              (event: InputCustomEvent) => 
-                event.detail.value && setInput(parseFloat(event.detail.value))
+            onIonInput={
+              (event: InputCustomEvent) => {
+                const asFloat = parseFloat(event.detail.value as string)
+                if (!Number.isNaN(asFloat)) 
+                  setInput(asFloat)
+                else
+                  setInput(0)
+              }
             } 
-          /> :
-          <IonText>
-            <h2>Debe seleccionar un tipo de cotización para operar</h2>
-          </IonText>
+          />
         }
-        {loading ?
+        {loading?
           <IonSpinner name="bubbles"></IonSpinner> :
-          input ?
-            <IonCard>
+            (selectedQuotation &&
+            <IonCard className="ut--l_r_margin">
               <IonCardHeader>
-                <IonCardTitle>{new Date(quotation.fecha).toLocaleTimeString() + " " + new Date(quotation.fecha).toLocaleDateString()}</IonCardTitle>
-                <IonCardSubtitle>Conversión</IonCardSubtitle>
+                <IonCardTitle >Conversión</IonCardTitle>
               </IonCardHeader>
 
               <IonCardContent>
-                <IonText className={"quotation-display"}>
-                  Conversión a compra: {convert(input, quotation.compra)}
+                <IonText color="dark" className={"conversion quotation-display"}>
+                  Conversión a compra: ${convert(input, quotation.compra).toLocaleString()}
                 </IonText >
-                <IonText className={"quotation-display"}>
-                  Conversión a venta: {convert(input, quotation.venta)}
+                <IonText color="dark" className={"conversion quotation-display"}>
+                  Conversión a venta: ${convert(input, quotation.venta).toLocaleString()}
                 </IonText >
               </IonCardContent>
-            </IonCard> : 
-            selectedQuotation && 
-              <IonCard>
-                <IonCardHeader>
-                  <IonCardTitle>
-                    <IonSkeletonText animated={true} style={{ width: '100%' }}></IonSkeletonText>
-                  </IonCardTitle>
-                  <IonCardSubtitle>
-                    <IonSkeletonText animated={true} style={{ width: '40%' }}></IonSkeletonText>
-                  </IonCardSubtitle>
-                </IonCardHeader>
 
-                <IonCardContent>
-                  <IonText className={"quotation-display"} >
-                    <IonSkeletonText animated={true} style={{ width: '80%' }}></IonSkeletonText>
-                  </IonText >
-                  <IonText className={"quotation-display"} >
-                    <IonSkeletonText animated={true} style={{ width: '80%' }}></IonSkeletonText>
-                  </IonText >
-                </IonCardContent>
-              </IonCard>
+              <IonText color="medium" className={"card--footer"}>{new Date(quotation.fecha).toLocaleTimeString() + " " + new Date(quotation.fecha).toLocaleDateString()}</IonText>
+            </IonCard>)
         }
       </IonContent>
     </IonPage>

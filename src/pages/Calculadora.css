@@ -1,0 +1,33 @@
+.quotation-display {
+    display: block;
+}
+
+.change-conversion {
+    display: flex;
+    align-items: center;
+    gap: .8rem;
+    width: max-content;
+    margin-top: .4rem;
+    font-size: 1.1rem;
+}
+
+.card--footer {
+    display: block;
+    text-align: end;
+    margin-right: .8rem;
+    margin-bottom: .4rem;
+}
+
+.resize-mobile {
+    @media screen and (max-width: 768px) {
+        text-align: center;
+    }
+}
+
+.header {
+    padding: 0;
+}
+
+.conversion {
+    font-size: 1.1rem;
+}

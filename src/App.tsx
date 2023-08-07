@@ -10,9 +10,9 @@ import {
   setupIonicReact
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
-import { ellipse, square, triangle } from 'ionicons/icons';
-import Tab1 from './pages/Tab1';
-import Tab2 from './pages/Tab2';
+import { calculatorOutline, cashOutline } from 'ionicons/icons';
+import Tab1 from './pages/Calculadora';
+import Tab2 from './pages/Cotizaciones';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -40,23 +40,23 @@ const App: React.FC = () => (
     <IonReactRouter>
       <IonTabs>
         <IonRouterOutlet>
-          <Route exact path="/tab1">
+          <Route exact path="/calculadora">
             <Tab1 />
           </Route>
-          <Route exact path="/tab2">
+          <Route exact path="/cotizaciones">
             <Tab2 />
           </Route>
           <Route exact path="/">
-            <Redirect to="/tab1" />
+            <Redirect to="/calculadora" />
           </Route>
         </IonRouterOutlet>
         <IonTabBar slot="bottom">
-          <IonTabButton tab="tab1" href="/tab1">
-            <IonIcon aria-hidden="true" icon={triangle} />
+          <IonTabButton tab="calculadora" href="/calculadora">
+            <IonIcon aria-hidden="true" icon={calculatorOutline} />
             <IonLabel>Calculadora</IonLabel>
           </IonTabButton>
-          <IonTabButton tab="tab2" href="/tab2">
-            <IonIcon aria-hidden="true" icon={ellipse} />
+          <IonTabButton tab="cotizaciones" href="/cotizaciones">
+            <IonIcon aria-hidden="true" icon={cashOutline} />
             <IonLabel>Cotizaciones</IonLabel>
           </IonTabButton>
         </IonTabBar>
