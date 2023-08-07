@@ -9,9 +9,9 @@ import { StoreManager } from '../services/storage';
 const Cotizaciones: React.FC = () => {
   const [selectedValues, setSelectedValues] = useState(['blue', 'ccl'] as Quotation[])
   const store = new StoreManager<Quotation[]>();
+  store.init()
 
   useEffect(() => {
-    store.init()
     store.getItem("cotizaciones").then((cotizaciones: Quotation[]) => cotizaciones && setSelectedValues(cotizaciones))
   }, [])
 
@@ -36,7 +36,7 @@ const Cotizaciones: React.FC = () => {
         <QuotationSelector selectedValues={selectedValues} setSelectedValues={updateSelectedValues}/>
         <div className="inner-container ut--l_r_margin">
           {
-            selectedValues.map((type)=><QuotationFrame type={type}/>)
+            selectedValues.map((type)=><QuotationFrame key={type} type={type}/>)
           }
         </div>
       </IonContent>
