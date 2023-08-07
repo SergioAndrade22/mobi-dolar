@@ -18,12 +18,6 @@
     margin-bottom: .4rem;
 }
 
-.resize-mobile {
-    @media screen and (max-width: 768px) {
-        text-align: center;
-    }
-}
-
 .conversion {
     font-size: 1.1rem;
 }
