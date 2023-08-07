@@ -14,7 +14,7 @@ const QuotationSelector: React.FC<Props> = ({ selectedValues, setSelectedValues 
 
   return (
     <IonSelect 
-      className="selector ion-text-capitalize"
+      className="ut--l_r_margin ion-text-capitalize"
       id="quotation-select"
       aria-label="Cotizaciones" 
       placeholder="Seleccione las cotizaciones a mostrar"

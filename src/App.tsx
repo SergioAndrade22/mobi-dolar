@@ -11,8 +11,9 @@ import {
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import { calculatorOutline, cashOutline } from 'ionicons/icons';
-import Tab1 from './pages/Calculadora';
-import Tab2 from './pages/Cotizaciones';
+import Calculadora from './pages/Calculadora';
+import Cotizaciones from './pages/Cotizaciones';
+import "./styles/styles.css"
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -41,10 +42,10 @@ const App: React.FC = () => (
       <IonTabs>
         <IonRouterOutlet>
           <Route exact path="/calculadora">
-            <Tab1 />
+            <Calculadora />
           </Route>
           <Route exact path="/cotizaciones">
-            <Tab2 />
+            <Cotizaciones />
           </Route>
           <Route exact path="/">
             <Redirect to="/calculadora" />

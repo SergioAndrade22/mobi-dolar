@@ -20,7 +20,6 @@ import {
   SelectCustomEvent,
 } from '@ionic/react';
 import './Calculadora.css';
-import '../styles/styles.css';
 import { getQuotation } from '../services/liveQuotation';
 import { useEffect, useState } from 'react';
 import { Quotation, quotationsMap } from '../constants';
@@ -32,7 +31,7 @@ const defaultQuotation = {
   fecha: ""
 }
 
-const Tab1: React.FC = () => {
+const Calculadora: React.FC = () => {
   const [selectedQuotation, setSelectedQuotation] = useState("" as Quotation)
   const [quotation, setQuotation] = useState(defaultQuotation)
   const [loading, setLoading] = useState(false)
@@ -148,4 +147,4 @@ const Tab1: React.FC = () => {
   );
 };
 
-export default Tab1;
+export default Calculadora;

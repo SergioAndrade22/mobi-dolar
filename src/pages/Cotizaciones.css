@@ -2,8 +2,6 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
-    padding-right: .6rem;
-    padding-left: .6rem;
     gap: .6rem;
 }
 

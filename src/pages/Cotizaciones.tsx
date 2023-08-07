@@ -5,14 +5,14 @@ import { useState } from 'react';
 import QuotationFrame from '../components/QuotationFrame';
 import { Quotation } from '../constants';
 
-const Tab2: React.FC = () => {
+const Cotizaciones: React.FC = () => {
   const [selectedValues, setSelectedValues] = useState(['blue', 'ccl'] as Quotation[])
 
   return (
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>Cotizaciones</IonTitle>
+          <IonTitle className="header ut--l_r_margin">Cotizaciones</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
@@ -22,7 +22,7 @@ const Tab2: React.FC = () => {
           </IonToolbar>
         </IonHeader>
         <QuotationSelector selectedValues={selectedValues} setSelectedValues={setSelectedValues}/>
-        <div className="inner-container">
+        <div className="inner-container ut--l_r_margin">
           {
             selectedValues.map((type)=><QuotationFrame type={type}/>)
           }
@@ -32,4 +32,4 @@ const Tab2: React.FC = () => {
   );
 };
 
-export default Tab2;
+export default Cotizaciones;
