@@ -9,6 +9,7 @@ import {
   IonHeader,
   IonIcon,
   IonInput,
+  IonLabel,
   IonPage,
   IonRippleEffect,
   IonSelect,
@@ -66,9 +67,9 @@ const Calculadora: React.FC = () => {
 
   return (
     <IonPage>
-      <IonHeader className="resize-mobile">
+      <IonHeader>
         <IonToolbar>
-          <IonTitle className="header ut--l_r_margin">Calculadora</IonTitle>
+          <IonTitle className="header ut--l_r_margin">💱 Calculadora</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
@@ -77,73 +78,80 @@ const Calculadora: React.FC = () => {
             <IonTitle size="large">Calculadora</IonTitle>
           </IonToolbar>
         </IonHeader>
-        <div className="change-conversion ut--justify-space-between ut--l_r_margin">
-          <IonSelect 
-            className="ion-text-capitalize ut--l_r_margin ut--max-content-width"
-            id="quotation-select"
-            aria-label="Cotizaciones" 
-            placeholder="Seleccione una cotización para operar"
-            multiple={false}
-            value={selectedQuotation}
-            onIonChange={(event: SelectCustomEvent) => handleSelect(event.detail.value as Quotation)}>
-            {
-              Object.keys(quotationsMap).map((key) => (
-                <IonSelectOption className="ion-text-capitalize" key={key} value={key}>{key}</IonSelectOption>
-              ))
-            }
-          </IonSelect>
-          <div className="change-swap">
-            <IonText>{toPesos ? "Dólares" : "Pesos"}</IonText>
-            <IonButton 
-              className="ion-activatable ripple-parent rounded-rectangle" 
-              size={"small"}
-              onClick={() => handleToggle()}
+
+        <div className="conversion-settings ut--l_r_margin">
+          <div className="quotation-select-group">
+            <IonLabel position="stacked" className="select-label">Tipo de cotización</IonLabel>
+            <IonSelect
+              className="conversion-select ion-text-capitalize"
+              placeholder="Seleccione una cotización"
+              value={selectedQuotation}
+              onIonChange={(event: SelectCustomEvent) => handleSelect(event.detail.value as Quotation)}
             >
-              <IonRippleEffect />
-              <IonIcon icon={swapHorizontalOutline} size={"small"} />
-            </IonButton>
-            <IonText>{toPesos ? "Pesos" : "Dólares"}</IonText>
+              {Object.keys(quotationsMap).map((key) => (
+                <IonSelectOption className='ion-text-capitalize' key={key} value={key}>
+                  {key}
+                </IonSelectOption>
+              ))}
+            </IonSelect>
+          </div>
+
+          <div className="conversion-toggle-group">
+            <IonLabel className="toggle-label">Conversión</IonLabel>
+            <div className="toggle-wrapper">
+              <IonText>{toPesos ? "💵 Dólares" : "🇦🇷 Pesos"}</IonText>
+              <IonButton
+                className="swap-btn ion-activatable ripple-parent"
+                size="small"
+                onClick={() => handleToggle()}
+              >
+                <IonRippleEffect />
+                <IonIcon icon={swapHorizontalOutline} />
+              </IonButton>
+              <IonText>{toPesos ? "🇦🇷 Pesos" : "💵 Dólares"}</IonText>
+            </div>
           </div>
         </div>
-        {selectedQuotation && 
+
+        {selectedQuotation && (
           <IonInput
-            className="ut--l_r_margin"
+            className="ut--l_r_margin conversion-input"
             label="Ingrese el monto que desea convertir:"
             labelPlacement="floating"
             type="number"
             placeholder="#####"
             value={input}
-            onIonInput={
-              (event: InputCustomEvent) => {
-                const asFloat = parseFloat(event.detail.value as string)
-                if (!Number.isNaN(asFloat)) 
-                  setInput(asFloat)
-                else
-                  setInput(0)
-              }
-            } 
+            onIonInput={(event: InputCustomEvent) => {
+              const asFloat = parseFloat(event.detail.value as string);
+              setInput(Number.isNaN(asFloat) ? 0 : asFloat);
+            }}
           />
-        }
-        {loading?
-          <IonSpinner name="bubbles"></IonSpinner> :
-            (selectedQuotation &&
-            <IonCard className="ut--l_r_margin">
+        )}
+
+        {loading ? (
+          <IonSpinner name="bubbles" />
+        ) : (
+          selectedQuotation && (
+            <IonCard className="ut--l_r_margin conversion-card">
               <IonCardHeader>
-                <IonCardTitle >Conversión</IonCardTitle>
+                <IonCardTitle>💹 Conversión</IonCardTitle>
               </IonCardHeader>
 
               <IonCardContent>
-                <IonText color="dark" className={"conversion quotation-display"}>
-                  Conversión a compra: ${convert(input, quotation.compra).toLocaleString()}
-                </IonText >
-                <IonText color="dark" className={"conversion quotation-display"}>
-                  Conversión a venta: ${convert(input, quotation.venta).toLocaleString()}
-                </IonText >
+                <IonText className="conversion conversion-buy">
+                  Compra: ${convert(input, quotation.compra).toLocaleString()}
+                </IonText>
+                <IonText className="conversion conversion-sell">
+                  Venta: ${convert(input, quotation.venta).toLocaleString()}
+                </IonText>
               </IonCardContent>
 
-              <IonText color="medium" className={"card--footer"}>{new Date(quotation.fecha).toLocaleTimeString() + " " + new Date(quotation.fecha).toLocaleDateString()}</IonText>
-            </IonCard>)
-        }
+              <IonText color="medium" className="card--footer">
+                {new Date(quotation.fecha).toLocaleTimeString()} - {new Date(quotation.fecha).toLocaleDateString()}
+              </IonText>
+            </IonCard>
+          )
+        )}
       </IonContent>
     </IonPage>
   );

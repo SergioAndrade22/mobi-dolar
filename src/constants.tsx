@@ -3,10 +3,6 @@ export const quotationsMap = {
         dolarHoy: "dolar-blue",
         dolarSi: "blue",
     },
-    oficial: {
-        dolarHoy: "dolar-oficial",
-        dolarSi: "oficial",
-    },
     bolsa: {
         dolarHoy: "dolar-mep",
         dolarSi: "bolsa",
@@ -15,13 +11,17 @@ export const quotationsMap = {
         dolarHoy: "dolar-contado-con-liquidacion",
         dolarSi: "contadoconliqui",
     },
-    mayorista: {
-        dolarHoy: "dolar-mayorista",
-        dolarSi: "mayorista",
-    },
     crypto: {
         dolarHoy: "dolar-cripto",
         dolarSi: "cripto",
+    },
+    oficial: {
+        dolarHoy: "dolar-oficial",
+        dolarSi: "oficial",
+    },
+    mayorista: {
+        dolarHoy: "dolar-mayorista",
+        dolarSi: "mayorista",
     },
     tarjeta: {
         dolarHoy: "dolar-tarjeta",
