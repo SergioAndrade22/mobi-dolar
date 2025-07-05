@@ -92,3 +92,34 @@
   margin-bottom: 0.4rem;
   color: #92949c;
 }
+
+.masked-input-wrapper {
+  margin-top: 1.2rem;
+}
+
+.input-label {
+  font-size: 0.95rem;
+  margin-bottom: 0.2rem;
+  color: #ccc;
+}
+
+.masked-input {
+  font-size: 1.2rem;
+  padding: 0.6rem 1rem;
+  border: 1px solid #444;
+  border-radius: 8px;
+  background-color: #1e1e1e;
+  color: white;
+  width: 100%;
+}
+
+.masked-input:focus {
+  outline: none;
+  border-color: #2dd36f;
+}
+
+.input-helper {
+  font-size: 0.75rem;
+  margin-top: 0.2rem;
+  display: block;
+}

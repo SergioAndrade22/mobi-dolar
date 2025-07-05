@@ -25,6 +25,7 @@ import { getQuotation } from '../services/liveQuotation';
 import { useEffect, useState } from 'react';
 import { Quotation, quotationsMap } from '../constants';
 import { swapHorizontalOutline } from 'ionicons/icons';
+import { NumericFormat } from 'react-number-format';
 
 const defaultQuotation = {
   compra: 0,
@@ -114,18 +115,27 @@ const Calculadora: React.FC = () => {
         </div>
 
         {selectedQuotation && (
-          <IonInput
-            className="ut--l_r_margin conversion-input"
-            label="Ingrese el monto que desea convertir:"
-            labelPlacement="floating"
-            type="number"
-            placeholder="#####"
-            value={input}
-            onIonInput={(event: InputCustomEvent) => {
-              const asFloat = parseFloat(event.detail.value as string);
-              setInput(Number.isNaN(asFloat) ? 0 : asFloat);
-            }}
-          />
+          <div className="masked-input-wrapper ut--l_r_margin">
+            <IonLabel position="stacked" className="input-label">
+              Monto a convertir
+            </IonLabel>
+            <NumericFormat
+              className="masked-input"
+              thousandSeparator=","
+              decimalSeparator="."
+              prefix="$"
+              allowNegative={false}
+              decimalScale={2}
+              value={input}
+              onValueChange={(values) => {
+                const { floatValue } = values;
+                setInput(floatValue || 0);
+              }}
+            />
+            <IonText color="medium" className="input-helper">
+              Solo números. Se mostrará el valor con formato mientras escribe.
+            </IonText>
+          </div>
         )}
 
         {loading ? (
