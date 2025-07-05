@@ -32,7 +32,7 @@ const defaultQuotation = {
 }
 
 const Calculadora: React.FC = () => {
-  const [selectedQuotation, setSelectedQuotation] = useState("" as Quotation)
+  const [selectedQuotation, setSelectedQuotation] = useState("blue" as Quotation)
   const [quotation, setQuotation] = useState(defaultQuotation)
   const [loading, setLoading] = useState(false)
   const [input, setInput] = useState(0)
@@ -77,32 +77,34 @@ const Calculadora: React.FC = () => {
             <IonTitle size="large">Calculadora</IonTitle>
           </IonToolbar>
         </IonHeader>
-        <div className="change-conversion ut--l_r_margin">
-          <IonText>{toPesos ? "Dólares" : "Pesos"}</IonText>
-          <IonButton 
-            className="ion-activatable ripple-parent rounded-rectangle" 
-            size={"small"}
-            onClick={() => handleToggle()}
-          >
-            <IonRippleEffect />
-            <IonIcon icon={swapHorizontalOutline} size={"small"} />
-          </IonButton>
-          <IonText>{toPesos ? "Pesos" : "Dólares"}</IonText>
+        <div className="change-conversion ut--justify-space-between ut--l_r_margin">
+          <IonSelect 
+            className="ion-text-capitalize ut--l_r_margin ut--max-content-width"
+            id="quotation-select"
+            aria-label="Cotizaciones" 
+            placeholder="Seleccione una cotización para operar"
+            multiple={false}
+            value={selectedQuotation}
+            onIonChange={(event: SelectCustomEvent) => handleSelect(event.detail.value as Quotation)}>
+            {
+              Object.keys(quotationsMap).map((key) => (
+                <IonSelectOption className="ion-text-capitalize" key={key} value={key}>{key}</IonSelectOption>
+              ))
+            }
+          </IonSelect>
+          <div className="change-swap">
+            <IonText>{toPesos ? "Dólares" : "Pesos"}</IonText>
+            <IonButton 
+              className="ion-activatable ripple-parent rounded-rectangle" 
+              size={"small"}
+              onClick={() => handleToggle()}
+            >
+              <IonRippleEffect />
+              <IonIcon icon={swapHorizontalOutline} size={"small"} />
+            </IonButton>
+            <IonText>{toPesos ? "Pesos" : "Dólares"}</IonText>
+          </div>
         </div>
-        <IonSelect 
-          className="ion-text-capitalize ut--l_r_margin"
-          id="quotation-select"
-          aria-label="Cotizaciones" 
-          placeholder="Seleccione una cotización para operar"
-          multiple={false}
-          value={selectedQuotation}
-          onIonChange={(event: SelectCustomEvent) => handleSelect(event.detail.value as Quotation)}>
-          {
-            Object.keys(quotationsMap).map((key) => (
-              <IonSelectOption className="ion-text-capitalize" key={key} value={key}>{key}</IonSelectOption>
-            ))
-          }
-        </IonSelect>
         {selectedQuotation && 
           <IonInput
             className="ut--l_r_margin"

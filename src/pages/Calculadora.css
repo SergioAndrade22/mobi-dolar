@@ -4,11 +4,15 @@
 
 .change-conversion {
     display: flex;
-    align-items: center;
-    gap: .8rem;
-    width: max-content;
+    justify-content: flex-start;
     margin-top: .4rem;
     font-size: 1.1rem;
+}
+
+.change-swap {
+    display: flex;
+    align-items: center;
+    gap: .8rem;
 }
 
 .card--footer {

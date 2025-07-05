@@ -4,7 +4,7 @@ export const quotationsMap = {
         dolarSi: "blue",
     },
     oficial: {
-        dolarHoy: "dolar-bancos-y-casas-de-cambio",
+        dolarHoy: "dolar-oficial",
         dolarSi: "oficial",
     },
     bolsa: {
@@ -15,13 +15,17 @@ export const quotationsMap = {
         dolarHoy: "dolar-contado-con-liquidacion",
         dolarSi: "contadoconliqui",
     },
-    solidario: {
-        dolarHoy: "banco-nacion",
-        dolarSi: "solidario",
+    mayorista: {
+        dolarHoy: "dolar-mayorista",
+        dolarSi: "mayorista",
     },
     crypto: {
-        dolarHoy: "bitcoin-usd",
-        dolarSi: "",
+        dolarHoy: "dolar-cripto",
+        dolarSi: "cripto",
+    },
+    tarjeta: {
+        dolarHoy: "dolar-tarjeta",
+        dolarSi: "tarjeta",
     },
 }
 

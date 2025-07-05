@@ -1,8 +1,7 @@
 import { Quotation, quotationsMap } from "../constants"
 import axios from 'axios'
 
-const url = "https://dolar-api-argentina.vercel.app/v1/dolares/"
-
+const url = "https://dolarapi.com/v1/dolares/"
 
 export const getQuotation = (type: Quotation) => {
     const uri = quotationsMap[type].dolarSi

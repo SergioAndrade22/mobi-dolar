@@ -3,7 +3,7 @@ import './Cotizaciones.css';
 import QuotationSelector from '../components/QuotationSelector';
 import { useEffect, useState } from 'react';
 import QuotationFrame from '../components/QuotationFrame';
-import { Quotation } from '../constants';
+import { Quotation, quotationsMap } from '../constants';
 import { StoreManager } from '../services/storage';
 
 const Cotizaciones: React.FC = () => {
@@ -12,7 +12,14 @@ const Cotizaciones: React.FC = () => {
   store.init()
 
   useEffect(() => {
-    store.getItem("cotizaciones").then((cotizaciones: Quotation[]) => cotizaciones && setSelectedValues(cotizaciones))
+    store.getItem("cotizaciones").then((cotizaciones: Quotation[]) => {
+      for (let quot of cotizaciones) {
+        if (!quotationsMap[quot]) {
+          cotizaciones = cotizaciones.filter(q => q !== quot);
+        }
+      }
+      cotizaciones && setSelectedValues(cotizaciones)
+    })
   }, [])
 
   const updateSelectedValues = (values: Quotation[]) => {

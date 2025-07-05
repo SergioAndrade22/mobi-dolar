@@ -3,10 +3,13 @@
     margin-right: 1rem;
 }
 
+.ut--max-content-width {
+    max-width: max-content;
+}
+
 .header {
     padding: 0;
 }
-
 
 @media screen and (max-width: 768px) {
     .header {
